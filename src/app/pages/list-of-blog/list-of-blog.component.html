@@ -1,0 +1,42 @@
+<div class="container" style=" width: 550px;height: 100vh;">
+    <p>Blog Post</p>
+    <button type="button" class="btn btn-primary" (click)="createBlog()" style="width: 121px;margin-bottom: 10px;">Create blog</button> &nbsp; &nbsp;
+    <div class="row">
+        <div *ngIf="showBlogList">
+            <div *ngFor="let blog of blogList">
+                <div class="card"
+                    style="margin-bottom: 10px;display: flex;flex-direction: row;">
+
+                    <div style="width: 92%;cursor: pointer;padding: 10px 12px;" (click)="gotoBlog(blog['_id'])">{{blog["blog_name"]}}
+                    </div>
+
+                    <div style="width: 8%;padding: 10px 3px;">
+                        <i class="bi bi-trash" (click)="deleteBlog(blog['_id'])" style="cursor: pointer;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p *ngIf="zeroBlog">You have not created any blog yet. To create blog click on the createBlog button.</p>
+
+        <div *ngIf="showSeperateBlog">
+            <div class="card" style="padding: 10px 12px;">
+                <p>
+                <span class="header" >{{blog["blog_name"]}}</span>
+                <i class="bi bi-pencil-square" style="cursor: pointer;
+                position: absolute;
+                right: 24px;
+                font-size: 23px;"
+                *ngIf="showEditIcon"
+                (click)="editBlog()"
+            ></i></p>
+               <p *ngIf="showEditIcon" >{{blog["description"]}}</p> 
+               <p *ngIf="!showEditIcon">Enter Description:</p>
+               <input *ngIf="!showEditIcon" type="text" [(ngModel)]="newDescription">
+            </div>
+            <button type="button" *ngIf="showEditIcon" class="btn btn-primary" (click)="goBack()" style="width: 101px;margin-top: 10px">Go Back</button> 
+            <button type="button" *ngIf="!showEditIcon" class="btn btn-primary" (click)="submit()" style="width: 101px;margin-top: 10px">Submit</button>
+        </div>
+
+    </div>
+</div>
